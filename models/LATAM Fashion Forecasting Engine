@@ -1,0 +1,437 @@
+# LATAM Fashion Forecasting Engine
+
+```python
+# ==========================================
+# LATAM FASHION FORECASTING ENGINE
+# ==========================================
+
+# ==========================================
+# IMPORTS
+# ==========================================
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import random
+
+
+# ==========================================
+# LOAD MAIN DATASET
+# ==========================================
+
+# original dataset
+
+df = pd.read_excel("/content/Base de datos completa.xlsx")
+
+# convert first row into headers
+
+df.columns = df.iloc[0]
+
+# remove duplicated header row
+
+df = df[1:]
+
+# reset index
+
+df = df.reset_index(drop=True)
+
+
+# ==========================================
+# CLEAN COLUMN NAMES
+# ==========================================
+
+df.columns = (
+    df.columns
+    .str.strip()
+    .str.lower()
+    .str.replace(" ", "_", regex=False)
+)
+
+
+# ==========================================
+# CONVERT CATEGORICAL LEVELS
+# ==========================================
+
+level_map = {
+    "low": 1,
+    "medium": 2,
+    "high": 3,
+    "very high": 4
+}
+
+columns_to_map = [
+    "microtrend_level",
+    "commercial_adoption",
+    "tiktok_presence",
+    "pinterest_presence",
+    "runway_presence",
+    "fast_fashion_presence"
+]
+
+for col in columns_to_map:
+    df[col] = (
+        df[col]
+        .astype(str)
+        .str.lower()
+        .map(level_map)
+    )
+
+
+# ==========================================
+# NUMERIC COLUMNS
+# ==========================================
+
+numeric_cols = [
+    "minimalism_level",
+    "maximalism_level",
+    "search_interest",
+    "growth_percent",
+    "utility_level",
+    "romanticism_level",
+    "movement_level",
+    "volume_level",
+    "sensuality_level"
+]
+
+for col in numeric_cols:
+    df[col] = pd.to_numeric(df[col], errors="coerce")
+
+
+# ==========================================
+# CLEAN TEXT COLUMNS
+# ==========================================
+
+text_cols = [
+    "trend_name",
+    "macrotrend",
+    "color_primary",
+    "color_secondary",
+    "silhouette_main",
+    "texture_main",
+    "pattern_type",
+    "mood_aesthetic"
+]
+
+for col in text_cols:
+    df[col] = (
+        df[col]
+        .astype(str)
+        .str.lower()
+        .str.strip()
+    )
+
+
+# ==========================================
+# DATASET VALIDATION
+# ==========================================
+
+print("\nNULL VALUES")
+print(df.isnull().sum())
+
+print("\nDATASET INFO")
+print(df.info())
+
+print("\nDATASET PREVIEW")
+print(df.head())
+
+
+# ==========================================
+# TREND SCORE
+# ==========================================
+
+# raw internet/runway popularity
+
+df["trend_score"] = (
+    df["runway_presence"] * 0.30 +
+    df["tiktok_presence"] * 0.20 +
+    df["pinterest_presence"] * 0.20 +
+    df["search_interest"] * 0.30
+)
+
+
+# ==========================================
+# SURVIVAL MODEL
+# ==========================================
+
+# probability of long-term survival
+
+df["survival_score"] = (
+    df["utility_level"] * 0.25 +
+    df["commercial_adoption"] * 0.25 +
+    df["minimalism_level"] * 0.15 +
+    df["runway_presence"] * 0.10 +
+    df["pinterest_presence"] * 0.10 +
+    df["movement_level"] * 0.05 +
+    df["volume_level"] * -0.05 +
+    df["maximalism_level"] * -0.15 +
+    df["tiktok_presence"] * -0.10
+)
+
+
+# ==========================================
+# CLASSIFY TREND SURVIVAL
+# ==========================================
+
+def classify_survival(score):
+
+    if score >= 2:
+        return "long_lasting"
+
+    elif score >= 1:
+        return "evolving"
+
+    else:
+        return "microtrend"
+
+
+df["trend_survival_type"] = df[
+    "survival_score"
+].apply(classify_survival)
+
+
+# ==========================================
+# SURVIVING TRENDS
+# ==========================================
+
+surviving_trends = df[
+    df["trend_survival_type"] != "microtrend"
+]
+
+
+# ==========================================
+# GENERATE NEW TRENDS
+# ==========================================
+
+def generate_new_trend():
+
+    trend_1 = surviving_trends.sample(1).iloc[0]
+    trend_2 = surviving_trends.sample(1).iloc[0]
+
+    return {
+        "new_trend_name":
+            trend_1["mood_aesthetic"] +
+            " " +
+            trend_2["silhouette_main"],
+
+        "primary_color":
+            trend_1["color_primary"],
+
+        "secondary_color":
+            trend_2["color_secondary"],
+
+        "inspired_by":
+            trend_1["trend_name"] +
+            " + " +
+            trend_2["trend_name"]
+    }
+
+
+print("\nGENERATED TREND")
+print(generate_new_trend())
+
+
+# ==========================================
+# LOAD CLIMATE DATASET
+# ==========================================
+
+climate_df = pd.read_excel("/content/clima.xlsx")
+
+
+# ==========================================
+# CLEAN CLIMATE DATASET
+# ==========================================
+
+climate_df.columns = (
+    climate_df.columns
+    .str.strip()
+    .str.lower()
+    .str.replace(" ", "_", regex=False)
+)
+
+climate_df["trend_clean"] = (
+    climate_df["trend"]
+    .astype(str)
+    .str.lower()
+    .str.strip()
+)
+
+
+df["trend_clean"] = (
+    df["trend_name"]
+    .astype(str)
+    .str.lower()
+    .str.strip()
+)
+
+
+# ==========================================
+# MERGE CLIMATE DATA
+# ==========================================
+
+df = df.merge(
+    climate_df,
+    on="trend_clean",
+    how="left"
+)
+
+
+# ==========================================
+# CLIMATE SURVIVAL SCORE
+# ==========================================
+
+# fill missing climate values
+
+df["heat_compatibility"] = df[
+    "heat_compatibility"
+].fillna(5)
+
+
+df["climate_survival_score"] = (
+    df["survival_score"] +
+    (df["heat_compatibility"] * 0.5)
+)
+
+
+# ==========================================
+# LOAD LATAM DATASET
+# ==========================================
+
+latam_df = pd.read_excel("/content/latam_fashion.xlsx")
+
+
+# ==========================================
+# CLEAN LATAM DATASET
+# ==========================================
+
+latam_df.columns = (
+    latam_df.columns
+    .str.strip()
+    .str.lower()
+    .str.replace(" ", "_", regex=False)
+)
+
+latam_df["trend_clean"] = (
+    latam_df["trend_name"]
+    .astype(str)
+    .str.lower()
+    .str.strip()
+)
+
+
+# ==========================================
+# MERGE LATAM DATA
+# ==========================================
+
+df = df.merge(
+    latam_df,
+    on="trend_clean",
+    how="left"
+)
+
+
+# ==========================================
+# LATAM SURVIVAL SCORE
+# ==========================================
+
+# final forecasting engine
+
+df["latam_survival_score"] = (
+
+    df["survival_score"] * 0.35 +
+
+    df["latam_resonance"] * 0.20 +
+
+    df["heat_resistance"] * 0.15 +
+
+    df["urban_compatibility_mexico"] * 0.15 +
+
+    df["emotional_factor"] * 0.10 +
+
+    df["color_energy"] * 0.05
+)
+
+
+# ==========================================
+# TOP LATAM TRENDS
+# ==========================================
+
+top_latam = df.sort_values(
+    by="latam_survival_score",
+    ascending=False
+)
+
+print("\nTOP LATAM SURVIVAL TRENDS")
+print(
+    top_latam[[
+        "trend_name",
+        "latam_survival_score"
+    ]]
+)
+
+
+# ==========================================
+# VISUALIZATION
+# ==========================================
+
+plt.figure(figsize=(12,8))
+
+sns.barplot(
+    data=top_latam,
+    x="latam_survival_score",
+    y="trend_name"
+)
+
+plt.title("LATAM Fashion Trend Survival Probability")
+plt.xlabel("Survival Score")
+plt.ylabel("Trend")
+
+plt.show()
+
+
+# ==========================================
+# EXPORT FINAL DATASET
+# ==========================================
+
+df.to_csv(
+    "latam_fashion_forecasting_dataset.csv",
+    index=False
+)
+
+print("\nDATASET EXPORTED SUCCESSFULLY")
+
+```
+
+# Suggested Project Structure
+
+```bash
+fashion-trend-intelligence-system/
+│
+├── data/
+│   ├── raw/
+│   ├── cleaned/
+│   └── processed/
+│
+├── models/
+│   └── latam_trend_forecasting_engine.py
+│
+├── notebooks/
+│   ├── fashion_trend_data_cleaning.ipynb
+│   └── trend_survival_model.ipynb
+│
+├── dashboard/
+│   └── app.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+# Next Step
+
+Move the cleaned script into:
+
+```bash
+models/latam_trend_forecasting_engine.py
+```
+
+Then we can build the Streamlit dashboard.
