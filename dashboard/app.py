@@ -10,10 +10,11 @@ import base64
 
 st.set_page_config(page_title="COORDENADA MX", layout="wide")
 
-df = pd.read_csv("fashion_trends_final.csv")
-
+import os
+df = pd.read_csv(os.path.join(os.path.dirname(__file__), "fashion_trends_final.csv"))
 def img_to_base64(path):
-    with open(path, "rb") as f:
+    full_path = os.path.join(os.path.dirname(__file__), path)
+    with open(full_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
 st.markdown("""
@@ -24,7 +25,7 @@ st.markdown("""
 .main-title { font-size: 82px; font-weight: 700; color: #2a2233; margin-bottom: 0; font-family: 'Cormorant Garamond', serif; line-height: 0.95; }
 .subtitle { font-size: 14px; color: #8a7d74; margin-top: 8px; margin-bottom: 40px; letter-spacing: 4px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
 .section-title { font-size: 58px; font-family: 'Cormorant Garamond', serif; color: #2a2233; margin-top: 40px; margin-bottom: 30px; }
-.card-category { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #7d7068; font-family: 'Inter', sans-serif; margin-top: 20px; margin-bottom: 10px; }
+.card-category { fontDRAPED-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #7d7068; font-family: 'Inter', sans-serif; margin-top: 20px; margin-bottom: 10px; }
 .card-title { font-size: 40px; color: #2f2430; margin-top: 0; font-family: 'Cormorant Garamond', serif; line-height: 0.95; }
 .card-text { font-size: 15px; color: #5c524d; font-family: 'Inter', sans-serif; line-height: 1.8; margin-top: 10px; }
 .arrow-link { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #7b6c62; }
