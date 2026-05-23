@@ -11,9 +11,13 @@ BASE_DIR = os.path.dirname(__file__)
 
 df = pd.read_csv(os.path.join(BASE_DIR, "fashion_trends_final.csv"))
 
-def img_to_base64(path):
-    with open(os.path.join(BASE_DIR, path), "rb") as f:
+def img_to_base64(filename):
+    with open(os.path.join(BASE_DIR, filename), "rb") as f:
         return base64.b64encode(f.read()).decode()
+
+def img_tag(filename, style="width:100%;border-radius:8px;"):
+    b64 = img_to_base64(filename)
+    return f'<img src="data:image/png;base64,{b64}" style="{style}"/>'
 
 st.markdown("""
 <style>
@@ -81,7 +85,7 @@ if selected == "Inicio":
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.image(os.path.join(BASE_DIR, "ImagenHero.png"), use_container_width=True)
+        st.markdown(img_tag("ImagenHero.png", "width:100%;border-radius:8px;"), unsafe_allow_html=True)
         st.markdown("""
         <div style="position:relative;margin-top:-85px;margin-left:28px;z-index:10;">
             <div style="background:rgba(208,190,162,0.95);padding:16px 28px;display:inline-block;
@@ -92,7 +96,7 @@ if selected == "Inicio":
         """, unsafe_allow_html=True)
 
     with col2:
-        st.image(os.path.join(BASE_DIR, "ImagenTelas.png"), use_container_width=True)
+        st.markdown(img_tag("ImagenTelas.png", "width:100%;border-radius:8px;"), unsafe_allow_html=True)
         st.markdown("""
         <div class="card-category">Tendencias</div>
         <div class="card-title">Minimalismo Utilitario</div>
@@ -337,36 +341,12 @@ elif selected == "Tendencias":
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <div class="gallery">
-        <div class="gallery-item">
-            <img src="data:image/png;base64,{img_coquette}" />
-            <div class="gallery-score">LATAM 6.21</div>
-            <div class="gallery-overlay"><span class="gallery-badge badge-evolving">Ascendente</span><div class="gallery-name">Coquette Aesthetic</div><div class="gallery-meta">Romantic Revival · Hyper Femininity</div></div>
-        </div>
-        <div class="gallery-item">
-            <img src="data:image/png;base64,{img_fringe}" />
-            <div class="gallery-score">LATAM 5.88</div>
-            <div class="gallery-overlay"><span class="gallery-badge badge-evolving">Ascendente</span><div class="gallery-name">Fringe Motion</div><div class="gallery-meta">Artisanal Sophistication · Dynamic Movement</div></div>
-        </div>
-        <div class="gallery-item">
-            <img src="data:image/png;base64,{img_visible}" />
-            <div class="gallery-score">LATAM 6.94</div>
-            <div class="gallery-overlay"><span class="gallery-badge badge-long">Permanencia</span><div class="gallery-name">Visible Midriff</div><div class="gallery-meta">Sensual Minimalism · Confident Sensuality</div></div>
-        </div>
-        <div class="gallery-item">
-            <img src="data:image/png;base64,{img_draped}" />
-            <div class="gallery-score">LATAM 6.19</div>
-            <div class="gallery-overlay"><span class="gallery-badge badge-long">Permanencia</span><div class="gallery-name">Draped Elegance</div><div class="gallery-meta">Quiet Luxury · Sophisticated Calm</div></div>
-        </div>
-        <div class="gallery-item">
-            <img src="data:image/png;base64,{img_layered}" />
-            <div class="gallery-score">LATAM 2.08</div>
-            <div class="gallery-overlay"><span class="gallery-badge badge-microtrend">Declive</span><div class="gallery-name">Layered Volume</div><div class="gallery-meta">Romantic Volume · Editorial Romance</div></div>
-        </div>
-        <div class="gallery-item">
-            <img src="data:image/png;base64,{img_mob}" />
-            <div class="gallery-score">LATAM 3.41</div>
-            <div class="gallery-overlay"><span class="gallery-badge badge-microtrend">Declive</span><div class="gallery-name">Mob Wife Aesthetic</div><div class="gallery-meta">Luxury Excess · Opulent Drama</div></div>
-        </div>
+        <div class="gallery-item"><img src="data:image/png;base64,{img_coquette}" /><div class="gallery-score">LATAM 6.21</div><div class="gallery-overlay"><span class="gallery-badge badge-evolving">Ascendente</span><div class="gallery-name">Coquette Aesthetic</div><div class="gallery-meta">Romantic Revival · Hyper Femininity</div></div></div>
+        <div class="gallery-item"><img src="data:image/png;base64,{img_fringe}" /><div class="gallery-score">LATAM 5.88</div><div class="gallery-overlay"><span class="gallery-badge badge-evolving">Ascendente</span><div class="gallery-name">Fringe Motion</div><div class="gallery-meta">Artisanal Sophistication · Dynamic Movement</div></div></div>
+        <div class="gallery-item"><img src="data:image/png;base64,{img_visible}" /><div class="gallery-score">LATAM 6.94</div><div class="gallery-overlay"><span class="gallery-badge badge-long">Permanencia</span><div class="gallery-name">Visible Midriff</div><div class="gallery-meta">Sensual Minimalism · Confident Sensuality</div></div></div>
+        <div class="gallery-item"><img src="data:image/png;base64,{img_draped}" /><div class="gallery-score">LATAM 6.19</div><div class="gallery-overlay"><span class="gallery-badge badge-long">Permanencia</span><div class="gallery-name">Draped Elegance</div><div class="gallery-meta">Quiet Luxury · Sophisticated Calm</div></div></div>
+        <div class="gallery-item"><img src="data:image/png;base64,{img_layered}" /><div class="gallery-score">LATAM 2.08</div><div class="gallery-overlay"><span class="gallery-badge badge-microtrend">Declive</span><div class="gallery-name">Layered Volume</div><div class="gallery-meta">Romantic Volume · Editorial Romance</div></div></div>
+        <div class="gallery-item"><img src="data:image/png;base64,{img_mob}" /><div class="gallery-score">LATAM 3.41</div><div class="gallery-overlay"><span class="gallery-badge badge-microtrend">Declive</span><div class="gallery-name">Mob Wife Aesthetic</div><div class="gallery-meta">Luxury Excess · Opulent Drama</div></div></div>
     </div>
     """, height=520)
 
@@ -430,25 +410,13 @@ elif selected == "Estéticas":
                 <div class="highlight-text"><strong>Mood:</strong> {row['mood_aesthetic'].title()}<br><strong>Color:</strong> {row['color_primary'].title()}<br><strong>LATAM Score:</strong> {round(row['latam_survival_score'], 2)}</div>
             </div>""", unsafe_allow_html=True)
 
-# =========================================
-# CULTURA
-# =========================================
-
 elif selected == "Cultura":
     st.markdown('<div class="section-title">CULTURA</div>', unsafe_allow_html=True)
     st.write("Aquí irán análisis culturales.")
 
-# =========================================
-# LABORATORIO
-# =========================================
-
 elif selected == "Laboratorio":
     st.markdown('<div class="section-title">LABORATORIO</div>', unsafe_allow_html=True)
     st.write("Aquí irá el trend generator.")
-
-# =========================================
-# NOTICIAS
-# =========================================
 
 elif selected == "Noticias":
     st.markdown('<div class="section-title">NOTICIAS</div>', unsafe_allow_html=True)
