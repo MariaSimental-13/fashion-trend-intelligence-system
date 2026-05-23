@@ -355,60 +355,147 @@ elif selected == "Tendencias":
 # =========================================
 
 elif selected == "Estéticas":
-
-    df_latam = df.sort_values("latam_survival_score", ascending=False)
-    st.markdown('<div class="section-title">ESTÉTICAS QUE SOBREVIVEN</div>', unsafe_allow_html=True)
-    st.markdown("""<div class="card-text" style="max-width:780px;margin-bottom:32px;">
-        No todas las tendencias globales tienen la misma resonancia en México y Latinoamérica.
-        El <strong>LATAM Survival Score</strong> pondera compatibilidad climática, resonancia cultural, factor emocional y adaptabilidad urbana.
-    </div>""", unsafe_allow_html=True)
-
-    colE1, colE2, colE3 = st.columns(3)
-    with colE1:
-        best = df_latam.iloc[0]
-        st.markdown(f'<div class="highlight-card" style="text-align:center;"><div class="highlight-category">Estética líder LATAM</div><div class="highlight-title">{best["trend_name"].title()}</div></div>', unsafe_allow_html=True)
-    with colE2:
-        surviving = len(df[df["trend_survival_type"] != "microtrend"])
-        st.markdown(f'<div class="highlight-card" style="text-align:center;"><div class="highlight-category">Sobreviven en LATAM</div><div class="card-title" style="font-size:48px;">{surviving}</div></div>', unsafe_allow_html=True)
-    with colE3:
-        avg = round(df["latam_survival_score"].mean(), 2)
-        st.markdown(f'<div class="highlight-card" style="text-align:center;"><div class="highlight-category">Score promedio LATAM</div><div class="card-title" style="font-size:48px;">{avg}</div></div>', unsafe_allow_html=True)
-
-    st.markdown('<div class="card-category" style="margin-bottom:14px;margin-top:40px;">RANKING — LATAM SURVIVAL SCORE</div>', unsafe_allow_html=True)
-
-    tabla = df_latam[["trend_name","latam_survival_score","trend_survival_type","climate_fit","color_primary","mood_aesthetic"]].copy()
-    tabla.columns = ["Tendencia","LATAM Score","Tipo","Clima","Color Principal","Mood"]
-    tabla["Tendencia"] = tabla["Tendencia"].str.title()
-    tabla["LATAM Score"] = tabla["LATAM Score"].round(2)
-
-    def color_tipo(val):
-        if val == "long_lasting": return "background-color:#d4edda;color:#1a472a;"
-        elif val == "evolving": return "background-color:#fff3cd;color:#7d5a00;"
-        else: return "background-color:#f8d7da;color:#7b1a24;"
-
-    def color_score(val):
-        if val >= 4: return "background-color:#2a2233;color:white;font-weight:600;"
-        elif val >= 2.5: return "background-color:#9f3b21;color:white;"
-        else: return "background-color:#efe7dc;color:#5c524d;"
-
-    styled = (
-        tabla.style
-        .applymap(color_tipo, subset=["Tipo"])
-        .applymap(color_score, subset=["LATAM Score"])
-        .set_properties(**{"font-family":"Inter,sans-serif","font-size":"13px","padding":"10px 14px"})
-        .set_table_styles([{"selector":"th","props":[("background-color","#5c001f"),("color","white"),("font-family","Inter,sans-serif"),("font-size","11px"),("letter-spacing","2px"),("text-transform","uppercase"),("padding","12px 14px")]}])
-    )
-    st.dataframe(styled, use_container_width=True, height=460)
-
+# Top 3 tropicalizado
     st.markdown('<div class="section-title" style="font-size:42px;margin-top:50px;">Top 3 Estéticas LATAM</div>', unsafe_allow_html=True)
+
+    img_vis_trop  = img_to_base64("VISIBLE MIDRIFF TROPICALIZADA.png")
+    img_coq_trop  = img_to_base64("COQUETTE AESTHETIC TROPICALIZADA.png")
+    img_drap_trop = img_to_base64("DRAPED ELEGANCE TROPICALIZADA.png")
+
+    top3_data = [
+        {
+            "img": img_vis_trop,
+            "nombre": "Visible Midriff",
+            "tipo": "LONG LASTING",
+            "score": "6.94",
+            "macro": "Sensual Minimalism",
+            "mood": "Confident Sensuality",
+            "color": "#5c001f",
+        },
+        {
+            "img": img_coq_trop,
+            "nombre": "Coquette Aesthetic",
+            "tipo": "EVOLVING",
+            "score": "6.21",
+            "macro": "Romantic Revival",
+            "mood": "Hyper Femininity",
+            "color": "#cfbca0",
+        },
+        {
+            "img": img_drap_trop,
+            "nombre": "Draped Elegance",
+            "tipo": "LONG LASTING",
+            "score": "6.19",
+            "macro": "Quiet Luxury",
+            "mood": "Sophisticated Calm",
+            "color": "#5c001f",
+        },
+    ]
+
     cols_top = st.columns(3)
-    for i, (_, row) in enumerate(df_latam.head(3).iterrows()):
-        with cols_top[i]:
-            st.markdown(f"""<div class="highlight-card">
-                <div class="highlight-category">{row['climate_fit'].upper()} — {row['trend_survival_type'].upper()}</div>
-                <div class="highlight-title">{row['trend_name'].title()}</div>
-                <div class="highlight-text"><strong>Mood:</strong> {row['mood_aesthetic'].title()}<br><strong>Color:</strong> {row['color_primary'].title()}<br><strong>LATAM Score:</strong> {round(row['latam_survival_score'], 2)}</div>
-            </div>""", unsafe_allow_html=True)
+    for i, (col, data) in enumerate(zip(cols_top, top3_data)):
+        with col:
+            st.markdown(f"""
+            <div style="border-radius:16px;overflow:hidden;margin-bottom:8px;">
+                <img src="data:image/png;base64,{data['img']}"
+                    style="width:100%;height:320px;object-fit:cover;object-position:center top;border-radius:16px;display:block;"/>
+            </div>
+            <div class="highlight-card" style="border-top:3px solid {data['color']};margin-top:0;border-radius:0 0 16px 16px;">
+                <div class="highlight-category">{data['tipo']} — LATAM {data['score']}</div>
+                <div class="highlight-title">{data['nombre']}</div>
+                <div class="highlight-text">
+                    <strong>Macrotendencia:</strong> {data['macro']}<br>
+                    <strong>Mood estético:</strong> {data['mood']}<br>
+                    <strong>LATAM Score:</strong> {data['score']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            # --- GRÁFICA DE BURBUJAS ---
+    import plotly.express as px
+    import plotly.graph_objects as go
+
+    st.markdown("""
+    <div class="section-title" style="font-size:42px;margin-top:50px;">
+    Mapa de Permanencia LATAM
+    </div>
+    <div class="card-text" style="max-width:780px;margin-bottom:32px;">
+        Cada burbuja representa una tendencia. El tamaño indica su factor emocional,
+        el eje X su compatibilidad urbana en México y el eje Y su score de permanencia LATAM.
+    </div>
+    """, unsafe_allow_html=True)
+
+    bubble_df = df.copy()
+
+    color_map = {
+        "long_lasting": "#5c001f",
+        "evolving":     "#cfbca0",
+        "microtrend":   "#8a7d74"
+    }
+
+    label_map = {
+        "long_lasting": "Permanencia",
+        "evolving":     "Ascendente",
+        "microtrend":   "Declive"
+    }
+
+    bubble_df["tipo_label"] = bubble_df["trend_survival_type"].map(label_map)
+    bubble_df["color"]      = bubble_df["trend_survival_type"].map(color_map)
+    bubble_df["nombre"]     = bubble_df["trend_name"].str.title()
+
+    fig2 = go.Figure()
+
+    for tipo, grupo in bubble_df.groupby("trend_survival_type"):
+        fig2.add_trace(go.Scatter(
+            x=grupo["urban_compatibility_mexico"],
+            y=grupo["latam_survival_score"],
+            mode="markers+text",
+            name=label_map[tipo],
+            text=grupo["nombre"],
+            textposition="top center",
+            textfont=dict(family="Inter", size=10, color="#2a2233"),
+            marker=dict(
+                size=grupo["emotional_factor"] * 5,
+                color=color_map[tipo],
+                opacity=0.85,
+                line=dict(width=1.5, color="white")
+            ),
+            hovertemplate=(
+                "<b>%{text}</b><br>"
+                "Urban Compatibility: %{x}<br>"
+                "LATAM Score: %{y:.2f}<br>"
+                "<extra></extra>"
+            )
+        ))
+
+    fig2.update_layout(
+        height=480,
+        margin=dict(l=20, r=20, t=40, b=40),
+        paper_bgcolor='#f5f1ea',
+        plot_bgcolor='#efe7dc',
+        font=dict(family="Inter"),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="left",
+            x=0,
+            font=dict(size=11, family="Inter"),
+        ),
+        xaxis=dict(
+            title=dict(text="Compatibilidad Urbana México →", font=dict(family="Inter", size=11, color="#8a7d74")),
+            showgrid=True,
+            gridcolor="rgba(138,125,116,0.15)",
+            zeroline=False,
+        ),
+        yaxis=dict(
+            title=dict(text="LATAM Survival Score →", font=dict(family="Inter", size=11, color="#8a7d74")),
+            showgrid=True,
+            gridcolor="rgba(138,125,116,0.15)",
+            zeroline=False,
+        ),
+    )
+
+    st.plotly_chart(fig2, use_container_width=True)
 
 elif selected == "Cultura":
     st.markdown('<div class="section-title">CULTURA</div>', unsafe_allow_html=True)
