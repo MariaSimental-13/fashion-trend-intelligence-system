@@ -508,3 +508,168 @@ elif selected == "Laboratorio":
 elif selected == "Noticias":
     st.markdown('<div class="section-title">NOTICIAS</div>', unsafe_allow_html=True)
     st.write("Aquí irán noticias editoriales.")
+
+# =========================================
+# FOOTER
+# =========================================
+
+st.markdown("""
+<div style="
+    background-color: #2a2233;
+    margin-top: 80px;
+    padding: 52px 64px 36px 64px;
+">
+    <div style="
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+    ">
+
+        <!-- Columna 1: Branding -->
+        <div>
+            <div style="
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 28px;
+                font-weight: 700;
+                color: white;
+                letter-spacing: 2px;
+                margin-bottom: 16px;
+            ">
+                COORDENADA MX
+            </div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                color: rgba(255,255,255,0.55);
+                line-height: 1.8;
+                max-width: 280px;
+            ">
+                Inteligencia cultural latinoamericana aplicada al forecast de tendencias.
+                Modelo probabilístico de supervivencia estética para el mercado mexicano.
+            </div>
+            <div style="margin-top:24px;">
+                <span style="
+                    font-family: 'Inter', sans-serif;
+                    font-size: 10px;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    color: #cfbca0;
+                ">
+                    EDICIÓN 01 — PRIMAVERA VERANO 2026
+                </span>
+            </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: #cfbca0;
+                margin-bottom: 20px;
+            ">
+                Plataforma
+            </div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                color: rgba(255,255,255,0.6);
+                line-height: 2.2;
+            ">
+                Inicio<br>
+                Tendencias<br>
+                Estéticas<br>
+                Cultura<br>
+                Laboratorio<br>
+                Noticias
+            </div>
+        </div>
+
+        <!-- Columna 3: Contacto -->
+        <div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: #cfbca0;
+                margin-bottom: 20px;
+            ">
+                Contacto
+            </div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                color: rgba(255,255,255,0.6);
+                line-height: 2.2;
+            ">
+                contacto@coordenadamx.com<br>
+                Consultoría Privada<br>
+                Trabaja con nosotros<br>
+                Forecast Q2 2026
+            </div>
+        </div>
+
+        <!-- Columna 4: Legal -->
+        <div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                color: #cfbca0;
+                margin-bottom: 20px;
+            ">
+                Legal
+            </div>
+            <div style="
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                color: rgba(255,255,255,0.6);
+                line-height: 2.2;
+            ">
+                Términos de Servicio<br>
+                Política de Privacidad<br>
+                Créditos<br>
+                © 2026 Coordenada MX
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Línea divisoria -->
+    <div style="
+        height: 1px;
+        background: rgba(255,255,255,0.1);
+        margin-bottom: 24px;
+    "></div>
+
+    <!-- Bottom bar -->
+    <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    ">
+        <div style="
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+        ">
+            COORDENADA MX — INTELIGENCIA CULTURAL LATINOAMERICANA
+        </div>
+        <div style="
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        ">
+            Modelo probabilístico desarrollado con datos de TikTok, Pinterest, Google Trends, Vogue y Zara
+        </div>
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
