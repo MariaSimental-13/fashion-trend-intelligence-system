@@ -448,7 +448,7 @@ elif selected == "Estéticas":
         fig2.add_trace(go.Scatter(
             x=grupo["urban_compatibility_mexico"],
             y=grupo["latam_survival_score"],
-            mode="markers+text",
+            mode="markers",
             name=label_map[tipo],
             text=grupo["nombre"],
             textposition="top center",
