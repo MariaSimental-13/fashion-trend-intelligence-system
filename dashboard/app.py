@@ -502,6 +502,7 @@ elif selected == "Cultura":
     IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
     IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
     IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
+    IMG_MEXI       = img_to_base64("Meximalismo.jpg")
 
     CULTURA_HTML = f"""
     <!DOCTYPE html>
@@ -614,6 +615,8 @@ elif selected == "Cultura":
         color: #8B1A1A;
         margin-right: .5rem;
       }}
+
+      /* ── Sidebar ── */
       .art-sidebar {{
         position: sticky;
         top: 1rem;
@@ -627,6 +630,8 @@ elif selected == "Cultura":
         padding-bottom: .5rem;
         border-bottom: 1px solid #c8b89a;
       }}
+
+      /* ── Cards Substack ── */
       .sub-card {{
         display: block;
         text-decoration: none;
@@ -678,6 +683,19 @@ elif selected == "Cultura":
         height: 1px;
         background: #c8b89a;
       }}
+
+      /* ── Imagen Meximalismo ── */
+      .mexi-img-wrap {{
+        margin-top: 1.2rem;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #c8b89a;
+      }}
+      .mexi-img-wrap img {{
+        width: 100%;
+        display: block;
+        object-fit: cover;
+      }}
     </style>
     </head>
     <body>
@@ -691,6 +709,7 @@ elif selected == "Cultura":
 
     <div class="art-layout">
 
+      <!-- ── Artículo ── -->
       <article class="art-body">
 
         <p>Hay algo profundamente extraño en la forma en la que el mundo moderno decidió qué significa "buen gusto". Durante décadas, la moda global, el diseño de interiores, la arquitectura e incluso el branding corporativo han impulsado una estética específica como símbolo de sofisticación: espacios vacíos, colores neutros, líneas limpias, silencio visual. Beige, blanco, gris, negro. Minimalismo como sinónimo de elegancia, control y estatus.</p>
@@ -753,6 +772,7 @@ elif selected == "Cultura":
 
       </article>
 
+      <!-- ── Sidebar ── -->
       <aside class="art-sidebar">
         <div class="sidebar-label">También en Substack</div>
 
@@ -783,6 +803,11 @@ elif selected == "Cultura":
           </div>
         </a>
 
+        <!-- Imagen Meximalismo -->
+        <div class="mexi-img-wrap">
+          <img src="data:image/jpeg;base64,{IMG_MEXI}" alt="Meximalismo — Rebeldía Estética">
+        </div>
+
       </aside>
     </div>
 
@@ -790,7 +815,7 @@ elif selected == "Cultura":
     </html>
     """
 
-    components.html(CULTURA_HTML, height=2800, scrolling=True)
+    components.html(CULTURA_HTML, height=3200, scrolling=True)
 
 
 elif selected == "Laboratorio":
