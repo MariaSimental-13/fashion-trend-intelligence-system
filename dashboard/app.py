@@ -497,22 +497,22 @@ elif selected == "Estéticas":
 
     st.plotly_chart(fig2, use_container_width=True)
 elif selected == "Cultura":
-IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
-IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
-IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
-IMG_MEXI       = img_to_base64("Meximalismo.jpg")
-IMG_CULTURA1   = img_to_base64("Cultura1.jpg")
-IMG_MEXI3      = img_to_base64("Meximalismo3.jpg")
-IMG_MEXI1      = img_to_base64("meximalismo1.jpg")
+     IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
+     IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
+     IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
+     IMG_MEXI       = img_to_base64("Meximalismo.jpg")
+     IMG_CULTURA1   = img_to_base64("Cultura1.jpg")
+     IMG_MEXI3      = img_to_base64("Meximalismo3.jpg")
+     IMG_MEXI1      = img_to_base64("meximalismo1.jpg")
 
-    CULTURA_HTML = f"""
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-    <meta charset="UTF-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
+     CULTURA_HTML = f"""
+     <!DOCTYPE html>
+     <html lang="es">
+     <head>
+     <meta charset="UTF-8">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+     <style>
       *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
       body {{
         font-family: 'Karla', sans-serif;
