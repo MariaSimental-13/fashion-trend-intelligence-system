@@ -875,7 +875,6 @@ elif selected == "Cultura":
     </body>
     </html>
     """
-
     components.html(CULTURA_HTML, height=3400, scrolling=True)
 
 
