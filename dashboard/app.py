@@ -498,8 +498,300 @@ elif selected == "Estéticas":
     st.plotly_chart(fig2, use_container_width=True)
 
 elif selected == "Cultura":
-    st.markdown('<div class="section-title">CULTURA</div>', unsafe_allow_html=True)
-    st.write("Aquí irán análisis culturales.")
+
+    IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
+    IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
+    IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
+
+    CULTURA_HTML = f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+      body {{
+        font-family: 'Karla', sans-serif;
+        background: #F5F0E8;
+        color: #1a1614;
+        padding: 2rem 1.5rem 3rem;
+        max-width: 960px;
+        margin: 0 auto;
+      }}
+      .art-header {{
+        border-bottom: 1px solid #c8b89a;
+        padding-bottom: 1.2rem;
+        margin-bottom: 2rem;
+      }}
+      .art-tag {{
+        font-size: 10px;
+        letter-spacing: .18em;
+        color: #8B5E3C;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: .5rem;
+      }}
+      .art-title {{
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 600;
+        line-height: 1.1;
+        color: #1a1614;
+        margin-bottom: .4rem;
+      }}
+      .art-subtitle {{
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.05rem;
+        font-style: italic;
+        color: #5c4a3a;
+        margin-bottom: .8rem;
+        line-height: 1.5;
+      }}
+      .art-meta {{
+        font-size: 11px;
+        letter-spacing: .1em;
+        color: #8B5E3C;
+        text-transform: uppercase;
+      }}
+      .art-layout {{
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: 2.5rem;
+        align-items: start;
+      }}
+      @media (max-width: 680px) {{
+        .art-layout {{ grid-template-columns: 1fr; }}
+        .art-sidebar {{ position: static !important; }}
+      }}
+      .art-body p {{
+        font-size: 15px;
+        line-height: 1.9;
+        color: #2a2018;
+        margin-bottom: 1.1rem;
+        font-weight: 300;
+      }}
+      .art-body h2 {{
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1a1614;
+        margin: 2rem 0 .7rem;
+        line-height: 1.3;
+      }}
+      .art-body hr {{
+        border: none;
+        border-top: 1px solid #c8b89a;
+        margin: 1.8rem 0;
+      }}
+      .pull-quote {{
+        border-left: 2px solid #8B1A1A;
+        padding: .3rem 0 .3rem 1.2rem;
+        margin: 1.5rem 0;
+      }}
+      .pull-quote p {{
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #3a1a1a;
+        line-height: 1.6;
+        margin: 0;
+      }}
+      .list-poetic {{
+        list-style: none;
+        padding-left: 1.2rem;
+        margin: .3rem 0 1.1rem;
+      }}
+      .list-poetic li {{
+        font-size: 15px;
+        line-height: 1.8;
+        color: #2a2018;
+        font-weight: 300;
+      }}
+      .list-poetic li::before {{
+        content: "—";
+        color: #8B1A1A;
+        margin-right: .5rem;
+      }}
+      .art-sidebar {{
+        position: sticky;
+        top: 1rem;
+      }}
+      .sidebar-label {{
+        font-size: 10px;
+        letter-spacing: .18em;
+        color: #8B5E3C;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
+        border-bottom: 1px solid #c8b89a;
+      }}
+      .sub-card {{
+        display: block;
+        text-decoration: none;
+        background: #EDE8DE;
+        border: 1px solid #c8b89a;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        transition: transform .2s ease, box-shadow .2s ease;
+      }}
+      .sub-card:hover {{
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30,15,5,.12);
+      }}
+      .sub-card img {{
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        display: block;
+      }}
+      .sub-card-body {{ padding: .8rem; }}
+      .sub-card-label {{
+        font-size: 9px;
+        letter-spacing: .18em;
+        color: #8B1A1A;
+        text-transform: uppercase;
+        margin-bottom: .3rem;
+      }}
+      .sub-card-title {{
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1a1614;
+        line-height: 1.3;
+        margin-bottom: .3rem;
+      }}
+      .sub-card-cta {{
+        font-size: 10px;
+        letter-spacing: .12em;
+        color: #8B5E3C;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: .4rem;
+      }}
+      .sub-card-cta span {{
+        flex: 1;
+        height: 1px;
+        background: #c8b89a;
+      }}
+    </style>
+    </head>
+    <body>
+
+    <header class="art-header">
+      <div class="art-tag">Cultura · Identidad · Moda</div>
+      <h1 class="art-title">El maximalismo<br>es meximalismo</h1>
+      <p class="art-subtitle">Moda, identidad y la estandarización estética de un sistema extractivo</p>
+      <div class="art-meta">Coordenada MX &nbsp;·&nbsp; Laboratorio Cultural</div>
+    </header>
+
+    <div class="art-layout">
+
+      <article class="art-body">
+
+        <p>Hay algo profundamente extraño en la forma en la que el mundo moderno decidió qué significa "buen gusto". Durante décadas, la moda global, el diseño de interiores, la arquitectura e incluso el branding corporativo han impulsado una estética específica como símbolo de sofisticación: espacios vacíos, colores neutros, líneas limpias, silencio visual. Beige, blanco, gris, negro. Minimalismo como sinónimo de elegancia, control y estatus.</p>
+        <p>Pero para muchos países como México, esa estética nunca fue natural. Fue aprendida.</p>
+        <p>Porque México no nació minimalista. México nació barroco, excesivo, colorido, ritualista, emocional y simbólico. México nació maximalista. O mejor dicho: <em>meximalista</em>.</p>
+
+        <h2>El meximalismo no es una tendencia, es memoria cultural</h2>
+        <p>En México el color nunca fue decoración. Fue lenguaje. Los mercados, los bordados, las fachadas, los alebrijes, los altares, la talavera, los textiles indígenas, las fiestas patronales, la música, la gráfica popular y hasta la comida están construidos desde la abundancia visual. No existe la idea europea del "menos es más" porque históricamente nuestra cultura entendió otra cosa: más también comunica.</p>
+        <ul class="list-poetic">
+          <li>Más color.</li>
+          <li>Más textura.</li>
+          <li>Más símbolos.</li>
+          <li>Más emoción.</li>
+          <li>Más vida.</li>
+        </ul>
+        <p>La estética mexicana no busca desaparecer el entorno para transmitir pureza. Busca llenarlo de significado. Por eso el maximalismo conecta tan naturalmente con Latinoamérica y especialmente con México. No se siente artificial porque ya existía antes de que Pinterest o TikTok le pusieran nombre.</p>
+        <p>El problema es que durante mucho tiempo se nos enseñó que esa estética era "demasiado".</p>
+        <ul class="list-poetic">
+          <li>Demasiado ruidosa.</li>
+          <li>Demasiado cargada.</li>
+          <li>Demasiado popular.</li>
+          <li>Demasiado indígena.</li>
+          <li>Demasiado pobre.</li>
+          <li>Demasiado mexicana.</li>
+        </ul>
+
+        <hr>
+
+        <h2>El minimalismo como estética del poder</h2>
+        <p>El minimalismo moderno no surgió solamente por razones artísticas. También refleja la lógica del sistema económico que domina el planeta. Un sistema basado en eficiencia, producción masiva, homogenización y extracción necesita espacios fáciles de replicar y vender.</p>
+        <p>Por eso hoy una cafetería en México puede verse idéntica a una en Copenhague, Los Ángeles o Seúl. Mismos tonos arena. Mismo concreto. Mismos muebles de madera clara. Mismo branding "limpio". Mismo intento de neutralidad cultural.</p>
+        <div class="pull-quote"><p>La neutralidad vende porque elimina contexto. Y eliminar contexto facilita convertir todo en producto.</p></div>
+        <p>La cultura auténtica es incómoda para un sistema extractivo porque no siempre es eficiente. Tiene historia, contradicciones, identidad local y memoria colectiva. El capitalismo global ama la estética cuando puede comercializarla, pero teme la identidad cuando genera pertenencia real.</p>
+
+        <hr>
+
+        <h2>La moda europea como estándar universal</h2>
+        <p>Durante siglos Europa dictó qué era refinado, elegante y civilizado. La colonización no solo impuso sistemas políticos y económicos; también impuso aspiraciones estéticas. Vestirse "bien" significaba acercarse visualmente a Europa.</p>
+        <p>Y aunque el mundo cambió, muchas de esas jerarquías siguen presentes en la moda contemporánea. La idea de que el lujo debe ser silencioso tiene raíces políticas y económicas. El "quiet luxury" funciona porque comunica poder sin necesidad de exceso visible.</p>
+        <p>En México, históricamente el lujo también podía significar bordado, color, ornamentación, mezcla, artesanía y presencia visual. El exceso no era vulgaridad. Era celebración.</p>
+
+        <hr>
+
+        <h2>El problema no es el minimalismo, es la imposición</h2>
+        <p>El minimalismo no es el enemigo. Puede ser hermoso, funcional y hasta necesario en ciertos contextos. El problema aparece cuando se presenta como la única estética válida para verse moderno, sofisticado o exitoso.</p>
+        <div class="pull-quote"><p>Una población desconectada de su cultura es más fácil de convertir en mercado.</p></div>
+
+        <hr>
+
+        <h2>El regreso del meximalismo</h2>
+        <p>Lo interesante es que el maximalismo está regresando justo en un momento de agotamiento colectivo. La gente está cansada de los espacios fríos. De los feeds idénticos. De las marcas "limpias" sin personalidad. De la neutralidad emocional disfrazada de elegancia.</p>
+        <p>Por eso hoy resurgen tendencias que recuperan color, textura, artesanía y referencias culturales locales. Y México tiene muchísimo que aportar ahí porque nunca perdió completamente esa sensibilidad visual.</p>
+
+        <hr>
+
+        <h2>Tal vez el futuro no sea minimalista</h2>
+        <p>Quizá una de las cosas más radicales que puede hacer la cultura contemporánea es volver a sentirse local. Volver a usar color sin vergüenza. Volver a valorar la artesanía. Volver a construir espacios con personalidad.</p>
+        <p>Porque en un mundo obsesionado con la eficiencia y la uniformidad, conservar identidad puede convertirse en un acto de resistencia.</p>
+        <div class="pull-quote"><p>Porque el meximalismo, en el fondo, es una forma de decir: seguimos aquí.</p></div>
+
+      </article>
+
+      <aside class="art-sidebar">
+        <div class="sidebar-label">También en Substack</div>
+
+        <a class="sub-card" href="https://open.substack.com/pub/anonimapensante/p/nos-estan-criando-cansados?r=6yr3n0&utm_campaign=post&utm_medium=web" target="_blank">
+          <img src="data:image/png;base64,{IMG_CANSADOS}" alt="Nos están criando cansados">
+          <div class="sub-card-body">
+            <div class="sub-card-label">Cultura · Crítica</div>
+            <div class="sub-card-title">Nos están criando cansados</div>
+            <div class="sub-card-cta">Leer en Substack <span></span> →</div>
+          </div>
+        </a>
+
+        <a class="sub-card" href="https://open.substack.com/pub/anonimapensante/p/la-era-del-maquiavelismo-emocional?r=6yr3n0&utm_campaign=post&utm_medium=web" target="_blank">
+          <img src="data:image/png;base64,{IMG_MAQUIAVELO}" alt="La era del maquiavelismo emocional">
+          <div class="sub-card-body">
+            <div class="sub-card-label">Análisis · Poder</div>
+            <div class="sub-card-title">La era del maquiavelismo emocional</div>
+            <div class="sub-card-cta">Leer en Substack <span></span> →</div>
+          </div>
+        </a>
+
+        <a class="sub-card" href="https://open.substack.com/pub/anonimapensante/p/el-sofismo-moderno-hablar-bonito?r=6yr3n0&utm_campaign=post&utm_medium=web" target="_blank">
+          <img src="data:image/png;base64,{IMG_SOFISMO}" alt="El sofismo moderno">
+          <div class="sub-card-body">
+            <div class="sub-card-label">Filosofía · Lenguaje</div>
+            <div class="sub-card-title">El sofismo moderno: hablar bonito</div>
+            <div class="sub-card-cta">Leer en Substack <span></span> →</div>
+          </div>
+        </a>
+
+      </aside>
+    </div>
+
+    </body>
+    </html>
+    """
+
+    components.html(CULTURA_HTML, height=2800, scrolling=True)
+
 
 elif selected == "Laboratorio":
     st.markdown('<div class="section-title">LABORATORIO</div>', unsafe_allow_html=True)
