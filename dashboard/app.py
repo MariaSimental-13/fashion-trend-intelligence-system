@@ -496,13 +496,13 @@ elif selected == "Estéticas":
     )
 
     st.plotly_chart(fig2, use_container_width=True)
-
 elif selected == "Cultura":
 
     IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
     IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
     IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
     IMG_MEXI       = img_to_base64("Meximalismo.jpg")
+    IMG_CULTURA1   = img_to_base64("Cultura1.jpg")
 
     CULTURA_HTML = f"""
     <!DOCTYPE html>
@@ -617,10 +617,7 @@ elif selected == "Cultura":
       }}
 
       /* ── Sidebar ── */
-      .art-sidebar {{
-        position: sticky;
-        top: 1rem;
-      }}
+      .art-sidebar {{ position: sticky; top: 1rem; }}
       .sidebar-label {{
         font-size: 10px;
         letter-spacing: .18em;
@@ -678,11 +675,7 @@ elif selected == "Cultura":
         gap: 6px;
         margin-top: .4rem;
       }}
-      .sub-card-cta span {{
-        flex: 1;
-        height: 1px;
-        background: #c8b89a;
-      }}
+      .sub-card-cta span {{ flex: 1; height: 1px; background: #c8b89a; }}
 
       /* ── Imagen Meximalismo ── */
       .mexi-img-wrap {{
@@ -691,11 +684,59 @@ elif selected == "Cultura":
         overflow: hidden;
         border: 1px solid #c8b89a;
       }}
-      .mexi-img-wrap img {{
-        width: 100%;
-        display: block;
-        object-fit: cover;
+      .mexi-img-wrap img {{ width: 100%; display: block; object-fit: cover; }}
+
+      /* ── Bloque próximo artículo ── */
+      .next-article {{
+        margin-top: 1.4rem;
+        border: 1px solid #c8b89a;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #EDE8DE;
       }}
+      .next-article-img img {{
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        object-position: center 30%;
+        display: block;
+      }}
+      .next-article-body {{
+        padding: 1rem;
+        border-top: 2px solid #8B1A1A;
+      }}
+      .next-label {{
+        font-size: 9px;
+        letter-spacing: .18em;
+        color: #8B1A1A;
+        text-transform: uppercase;
+        margin-bottom: .6rem;
+      }}
+      .next-title {{
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1a1614;
+        line-height: 1.3;
+        margin-bottom: .6rem;
+      }}
+      .next-desc {{
+        font-size: 12px;
+        line-height: 1.7;
+        color: #5c4a3a;
+        font-style: italic;
+        margin-bottom: .8rem;
+      }}
+      .next-cta {{
+        font-size: 9px;
+        letter-spacing: .18em;
+        color: #8B5E3C;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }}
+      .next-cta span {{ flex: 1; height: 1px; background: #c8b89a; }}
     </style>
     </head>
     <body>
@@ -808,6 +849,19 @@ elif selected == "Cultura":
           <img src="data:image/jpeg;base64,{IMG_MEXI}" alt="Meximalismo — Rebeldía Estética">
         </div>
 
+        <!-- Próximo artículo -->
+        <div class="next-article">
+          <div class="next-article-img">
+            <img src="data:image/jpeg;base64,{IMG_CULTURA1}" alt="La moda como cultura">
+          </div>
+          <div class="next-article-body">
+            <div class="next-label">Próximamente · Cultura</div>
+            <div class="next-title">La moda no es frivolidad.</div>
+            <div class="next-desc">Es memoria, es política, es identidad. ¿Qué pasa cuando un sistema intenta borrarte el guardarropa?</div>
+            <div class="next-cta">Muy pronto <span></span> →</div>
+          </div>
+        </div>
+
       </aside>
     </div>
 
@@ -815,7 +869,7 @@ elif selected == "Cultura":
     </html>
     """
 
-    components.html(CULTURA_HTML, height=3200, scrolling=True)
+    components.html(CULTURA_HTML, height=3400, scrolling=True)
 
 
 elif selected == "Laboratorio":
