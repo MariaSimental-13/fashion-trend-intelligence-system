@@ -497,12 +497,13 @@ elif selected == "Estéticas":
 
     st.plotly_chart(fig2, use_container_width=True)
 elif selected == "Cultura":
-
-    IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
-    IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
-    IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
-    IMG_MEXI       = img_to_base64("Meximalismo.jpg")
-    IMG_CULTURA1   = img_to_base64("Cultura1.jpg")
+IMG_SOFISMO    = img_to_base64("EL_SOFISMO_MODERNO.png")
+IMG_MAQUIAVELO = img_to_base64("LA_ERA_DEL_MAQUIAVELISMO_EMOCIONAL.png")
+IMG_CANSADOS   = img_to_base64("NOS_ESTÁN_CRIANDO_CANSADOS.png")
+IMG_MEXI       = img_to_base64("Meximalismo.jpg")
+IMG_CULTURA1   = img_to_base64("Cultura1.jpg")
+IMG_MEXI3      = img_to_base64("Meximalismo3.jpg")
+IMG_MEXI1      = img_to_base64("meximalismo1.jpg")
 
     CULTURA_HTML = f"""
     <!DOCTYPE html>
@@ -861,7 +862,13 @@ elif selected == "Cultura":
             <div class="next-cta">Muy pronto <span></span> →</div>
           </div>
         </div>
-
+<!-- Galería extra -->
+<div class="mexi-img-wrap" style="margin-top:1rem;">
+  <img src="data:image/jpeg;base64,{IMG_MEXI3}" alt="Meximalismo 3">
+</div>
+<div class="mexi-img-wrap" style="margin-top:1rem;">
+  <img src="data:image/jpeg;base64,{IMG_MEXI1}" alt="Meximalismo 1">
+</div>
       </aside>
     </div>
 
