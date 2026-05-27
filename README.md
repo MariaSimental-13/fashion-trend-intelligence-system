@@ -1,10 +1,10 @@
-# 👠 Fashion Trend Intelligence System
+# Fashion Trend Intelligence System
 
 > Machine learning-powered fashion trend forecasting using probabilistic modeling, Python, and interactive data visualization.
 
 ---
 
-## ✨ Overview
+##  Overview
 
 The **Fashion Trend Intelligence System** is a data science project focused on identifying and forecasting fashion trends through probabilistic modeling and market data analysis.
 
@@ -20,7 +20,7 @@ The system was developed as an end-to-end analytical pipeline, including:
 
 ---
 
-## 🎯 Project Objectives
+##  Project Objectives
 
 - Build a probabilistic model capable of identifying emerging fashion trends
 - Develop a complete data pipeline from raw data to actionable insights
@@ -30,7 +30,7 @@ The system was developed as an end-to-end analytical pipeline, including:
 
 ---
 
-## 🛠 Technologies Used
+##  Technologies Used
 
 | Tool | Purpose |
 |---|---|
@@ -43,7 +43,7 @@ The system was developed as an end-to-end analytical pipeline, including:
 
 ---
 
-## 📊 Key Findings
+##  Key Findings
 
 - The model successfully identified trend-related patterns within real market data
 - Interactive visualizations improved exploratory analysis and trend interpretation
@@ -52,7 +52,7 @@ The system was developed as an end-to-end analytical pipeline, including:
 
 ---
 
-## 🧠 Strategic Interpretation
+##  Strategic Interpretation
 
 Fashion trend forecasting has traditionally relied on intuition, editorial expertise, and qualitative analysis.
 
@@ -70,7 +70,7 @@ The results suggest that even exploratory machine learning models can provide va
 
 ---
 
-## ❓ Research Question
+##  Research Question
 
 > **Can machine learning models identify and predict fashion trends from real market data?**
 
@@ -78,14 +78,14 @@ The findings suggest that probabilistic models can capture meaningful trend sign
 
 ---
 
-## 🚀 Interactive Dashboard
+##  Interactive Dashboard
 
-🔗 **View the Streamlit App**  
+ **View the Streamlit App**  
 [Open Dashboard](https://your-streamlit-link.streamlit.app)
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```bash
 Fashion-Trend-Intelligence-System/
