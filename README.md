@@ -81,7 +81,7 @@ The findings suggest that probabilistic models can capture meaningful trend sign
 ##  Interactive Dashboard
 
  **View the Streamlit App**  
-[Open Dashboard](https://your-streamlit-link.streamlit.app)
+[Open Dashboard]([https://your-streamlit-link.streamlit.app](https://fashion-trend-intelligence-system-fc62qxp7aamype8rqr7tqz.streamlit.app/))
 
 ---
 
